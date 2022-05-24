@@ -6,24 +6,45 @@ const typeDefs = gql`
         Director: String,
         actor: String
     }
-
-    type Query {
-        movies: [film]
-    }
     
     input filmInput {
+        id: ID
+    }
+
+    input filmOutput {
         name: String,
         Director: String,
         actor: String
     }
 
     input deletefilm{
-        name: String
+        id: ID
+    }
+
+    type deletefilmOutput{
+        status: String
     }
     
+    input updatefilmInput{
+        id:ID,
+        name:String,
+        Director: String,
+        actor: String
+    }
+
+    type updatefilmOutput{
+        status: String
+    }
+
+    type Query {
+        movies: [film],
+        getOneMovie(input:filmInput):film
+    }
+
     type Mutation {
         createfilm(input:filmInput): film
-        deletefilm(input:deletefilm): film
+        deletefilm(input:deletefilm): deletefilmOutput
+        updatefilm(input:updatefilmInput): updatefilmOutput
     }
     `;
 
